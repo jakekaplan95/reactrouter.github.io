@@ -19,6 +19,7 @@ const About = (props) => {
           if (props.match.params.symbol === stock.symbol) {
             return (
                 <div>
+                    <h1>{stock.name}</h1>
                 <h1>Last price: {stock.lastPrice}</h1>
                 <h2>High: {stock.high} Low: {stock.low}</h2>
             </div>
