@@ -10,37 +10,22 @@ const About = (props) => {
         {name: "Intel Corporation", symbol: "INTL", lastPrice: 36.16, change: -0.370000000000005, high: 36.78, low: 36.125, open: 36.58}
       ];
 
+      console.log(props)
 
-    const [lastPrice, setlastPrice] = useState(null)
+      const symbol = props.match.params
+      console.log(symbol)
 
-
-    const getlastPrice = async () => {
-        const response = await fetch(stocks)
-        console.log(response)
-        const data = await response.json()
-        setlastPrice(data)
-    }
-
-    useEffect(() => {
-        getlastPrice()
-    }, [])
-
-    const loaded = () => {
-        return(
-            <div>
-                <h1>{stocks.lastPrice}</h1>
-                <h2>{stocks.high}{stocks.low}</h2>
+      for (var stock of stocks) {
+          if (props.match.params.symbol === stock.symbol) {
+            return (
+                <div>
+                <h1>Last price: {stock.lastPrice}</h1>
+                <h2>High: {stock.high} Low: {stock.low}</h2>
             </div>
-        )
-    }
-
-    const loading = () => {
-        return <h1>Currently Loading....</h1>
-    }
-    console.log("hello");
-    console.log(lastPrice);
-
-    return lastPrice ? loaded() : loading()
+            )
+          }
+      }
+      return <div>no stock found</div>
 };
 
 export default About
